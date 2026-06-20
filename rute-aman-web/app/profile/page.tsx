@@ -226,7 +226,7 @@ export default function ProfilPage() {
       )}
 
       <Navbar />
-      <div className="min-h-screen bg-gray-50 pb-20 relative">
+      <div className="min-h-screen bg-gray-50 pb-20 relative pt-24">
         <div className="max-w-5xl mx-auto pt-10 px-6">
           
           {/* Header Profil */}

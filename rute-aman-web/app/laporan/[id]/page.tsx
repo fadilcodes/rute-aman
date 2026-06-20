@@ -231,7 +231,7 @@ export default function DetailLaporanPage() {
 
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-6 py-10">
+      <main className="max-w-7xl mx-auto px-6 py-10 pt-32">
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-3">
             <span className="bg-red-100 text-red-700 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
@@ -300,7 +300,7 @@ export default function DetailLaporanPage() {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
               <h3 className="text-xl font-bold text-gray-900 mb-6">Diskusi Komunitas</h3>
               
-              <div className="space-y-6 mb-8 max-h-[500px] overflow-y-auto pr-2">
+              <div className="space-y-6 mb-8 max-h-125 overflow-y-auto pr-2">
                 {report.comments?.length === 0 ? (
                   <p className="text-gray-400 text-center py-4">Belum ada diskusi, jadilah yang pertama berkomentar!</p>
                 ) : (
@@ -379,7 +379,7 @@ export default function DetailLaporanPage() {
                 
                 {/* 1. Fase Dilaporkan */}
                 <div className="relative">
-                  <div className="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center border-4 border-white shadow-sm">
+                  <div className="absolute -left-8.75 top-0.5 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center border-4 border-white shadow-sm">
                     <CheckCircle2 size={14} />
                   </div>
                   <h5 className="font-bold text-gray-900 text-sm">Dilaporkan</h5>
@@ -388,7 +388,7 @@ export default function DetailLaporanPage() {
 
                 {/* 2. Fase Diverifikasi */}
                 <div className="relative">
-                  <div className={`absolute -left-[35px] top-0.5 w-6 h-6 rounded-full flex items-center justify-center border-4 border-white shadow-sm ${isDiverifikasi ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                  <div className={`absolute -left-8.75 top-0.5 w-6 h-6 rounded-full flex items-center justify-center border-4 border-white shadow-sm ${isDiverifikasi ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
                     {isDiverifikasi ? <CheckCircle2 size={14} /> : <div className="w-2 h-2 rounded-full bg-gray-400"></div>}
                   </div>
                   <h5 className={`font-bold text-sm ${isDiverifikasi ? 'text-gray-900' : 'text-gray-500'}`}>Diverifikasi Admin</h5>

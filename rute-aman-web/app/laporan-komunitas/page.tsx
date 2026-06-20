@@ -108,7 +108,7 @@ export default function LaporanKomunitasPage() {
     <div className="min-h-screen bg-[#F8FAFC] font-sans flex flex-col">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-8 py-10 flex-1 w-full">
+      <main className="max-w-7xl mx-auto px-8 py-10 flex-1 w-full pt-32">
         {/* Header Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-blue-800 mb-3">Laporan Komunitas</h1>
@@ -170,17 +170,19 @@ export default function LaporanKomunitasPage() {
                   </div>
                   
                   <div className="absolute top-3 right-3">
-                    <span className={`flex items-center text-[11px] px-2 py-1 rounded font-medium shadow-sm ${
-                      report.status?.toLowerCase() === 'terverifikasi' 
-                        ? 'text-green-700 bg-white/95' 
-                        : 'text-gray-600 bg-white/95'
+                    <span className={`flex items-center text-[11px] px-2 py-1 rounded font-medium shadow-sm bg-white/95 ${
+                      report.status?.toLowerCase() === 'ditindaklanjuti' ? 'text-blue-700' :
+                      report.status?.toLowerCase() === 'terverifikasi' ? 'text-green-700' : 
+                      'text-gray-600'
                     }`}>
-                      {report.status?.toLowerCase() === 'terverifikasi' ? (
+                      {report.status?.toLowerCase() === 'ditindaklanjuti' ? (
+                        <CheckCircle2 className="w-3 h-3 text-blue-600 mr-1.5" />
+                      ) : report.status?.toLowerCase() === 'terverifikasi' ? (
                         <CheckCircle2 className="w-3 h-3 text-green-600 mr-1.5" />
                       ) : (
                         <Clock3 className="w-3 h-3 text-gray-500 mr-1.5" />
                       )}
-                      {report.status}
+                      {report.status || 'Dilaporkan'}
                     </span>
                   </div>
                 </div>

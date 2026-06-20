@@ -5,9 +5,9 @@ export default function Footer() {
         RuteAman <span className="font-normal text-slate-500">© 2026 RuteAman. Melindungi Komunitas Bersama.</span>
       </div>
       <div className="flex gap-4 mt-4 md:mt-0">
-        <a href="#" className="hover:text-slate-800">Kebijakan Privasi</a>
-        <a href="#" className="hover:text-slate-800">Syarat & Ketentuan</a>
-        <a href="#" className="hover:text-slate-800">Kontak Kami</a>
+        <a href="/kebijakan-privasi" className="hover:text-slate-800">Kebijakan Privasi</a>
+        <a href="/syarat-dan-ketentuan" className="hover:text-slate-800">Syarat & Ketentuan</a>
+        <a href="/kontak-kami" className="hover:text-slate-800">Kontak Kami</a>
       </div>
     </footer>
   );

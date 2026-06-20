@@ -113,7 +113,7 @@ export default function EditLaporanPage() {
   return (
     <>
       {notification && (
-        <div className={`fixed top-24 right-6 z-[9999] flex items-center p-4 rounded-xl shadow-lg border transition-all duration-300 animate-in slide-in-from-top-5 fade-in ${notification.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}>
+        <div className={`fixed top-24 right-6 z-9999 flex items-center p-4 rounded-xl shadow-lg border transition-all duration-300 animate-in slide-in-from-top-5 fade-in ${notification.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}>
           {notification.type === 'success' ? <CheckCircle2 className="mr-3" /> : <AlertTriangle className="mr-3" />}
           <p className="text-sm font-medium">{notification.message}</p>
           <button onClick={() => setNotification(null)} className="ml-4"><X size={16}/></button>
@@ -121,14 +121,14 @@ export default function EditLaporanPage() {
       )}
 
       <Navbar />
-      <div className="max-w-5xl mx-auto py-12 px-6">
+      <div className="max-w-5xl mx-auto py-12 px-6 pt-32">
         <h1 className="text-4xl font-bold text-blue-600 mb-2">Edit Laporan</h1>
         <form onSubmit={handleUpdate} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <label className="block mb-3 font-semibold">Pilih Lokasi Baru</label>
-              <div className="h-[280px] rounded-xl overflow-hidden border">
+              <div className="h-70 rounded-xl overflow-hidden border">
                 <MapComponent 
                   interactive={true} 
                   onLocationSelect={(lat, lng) => setLatLng({lat, lng})}

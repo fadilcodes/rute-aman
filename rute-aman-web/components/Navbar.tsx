@@ -17,13 +17,16 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="relative bg-white border-b border-slate-100 z-50">
+    <nav className="fixed pt-0 bg-white border-b border-slate-100 z-50 w-full">
       <div className="flex items-center justify-between py-4 px-6 md:px-8">
         
         {/* Logo RuteAman */}
         <Link href="/" className="text-xl font-bold text-blue-700 flex items-center gap-2">
-          <div className="w-4 h-5 bg-blue-700 rounded-sm" /> 
-          RuteAman
+          <img 
+            src="/RuteAman.png" 
+            alt="RuteAman Logo" 
+            className="w-50 object-contain"
+          />
         </Link>
 
         {/* Desktop Menu */}

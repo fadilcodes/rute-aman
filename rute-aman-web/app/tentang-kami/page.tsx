@@ -11,7 +11,7 @@ export default function TentangKami() {
     <div className="min-h-screen bg-[#F8FAFC] font-sans flex flex-col">
       <Navbar />
       
-      <main className="grow max-w-5xl mx-auto w-full px-6 py-10 space-y-20">
+      <main className="grow max-w-5xl mx-auto w-full px-6 py-10 space-y-20 pt-24">
         <HeroSection />
         <VisionMissionSection />
         <ValuesSection />

@@ -49,7 +49,7 @@ export default function Home() {
       {/* UPDATE: Hapus tinggi mutlak di main, ganti pakai min-h-screen biar fleksibel 
         buat responsif antar layar.
       */}
-      <main className="flex flex-col md:flex-row flex-1 bg-gray-50 min-h-screen">
+      <main className="flex flex-col md:flex-row flex-1 bg-gray-50 min-h-screen pt-24">
         
         {/* UPDATE: Peta
           Di HP tetap h-[55vh], di laptop dipaku tingginya pakai calc(100vh-100px).
@@ -59,12 +59,12 @@ export default function Home() {
           <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 bg-white">
             
             {/* Indikator Bahaya Mengambang */}
-            <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-white/95 backdrop-blur-sm p-3 rounded-xl shadow-md z-[400] text-gray-700 pointer-events-none border border-gray-100">
+            <div className="absolute top-4 left-4 md:top-2 md:left-15 bg-white/95 backdrop-blur-sm p-3 rounded-xl shadow-md z-400 text-gray-700 pointer-events-none border border-gray-100">
               <h4 className="font-bold text-xs md:text-sm mb-2">Indikator Bahaya</h4>
               <ul className="text-[10px] md:text-sm space-y-1.5 md:space-y-2">
                 <li className="flex items-center gap-2"><span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-red-500 rounded-full"></span> Kriminalitas</li>
-                <li className="flex items-center gap-2"><span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-yellow-500 rounded-full"></span> Lampu Padam</li>
-                <li className="flex items-center gap-2"><span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-gray-500 rounded-full"></span> Infrastruktur Rusak</li>
+                <li className="flex items-center gap-2"><span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-yellow-500 rounded-full"></span> Penerangan</li>
+                <li className="flex items-center gap-2"><span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-gray-500 rounded-full"></span> Infrastruktur</li>
               </ul>
             </div>
             

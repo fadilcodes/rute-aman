@@ -54,24 +54,29 @@ export default function RegisterPage() {
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
         {/* Kolom Kiri - Copywriting & Features */}
-        <div className="hidden md:block pr-8">
-          <h1 className="text-5xl font-bold text-blue-600 leading-tight mb-4">
-            Bergabung untuk Lingkungan yang <span className="text-green-700">Lebih Aman.</span>
+        <div className="flex flex-col items-center justify-center">
+           <img 
+            src="/RuteAman.png" 
+            alt="RuteAman Logo" 
+            className="w-100 object-contain items-center justify-center mb-3"
+          />
+          <h1 className=" text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 text-center">
+            Bergabung untuk Lingkungan yang <span className="text-blue-700">Lebih Aman.</span>
           </h1>
-          <p className="text-gray-600 text-lg mb-10 max-w-md">
+          <p className="text-gray-600 text-lg mb-10 max-w-md text-center">
             RuteAman membantu Anda menavigasi kota dengan informasi keamanan real-time dari komunitas untuk komunitas.
           </p>
           
-          <div className="flex gap-6">
-            <div className="bg-gray-100 p-5 rounded-2xl flex-1 border border-gray-200">
+          <div className="flex gap-6 justify-center items-center">
+            <div className="flex flex-col bg-gray-100 p-5 rounded-2xl flex-1 border border-gray-200 items-center justify-center">
               <ShieldCheck className="text-blue-600 mb-3" size={24} />
               <h3 className="font-bold text-gray-900 mb-1">Terpercaya</h3>
-              <p className="text-sm text-gray-600">Laporan diverifikasi oleh komunitas lokal.</p>
+              <p className="text-sm text-gray-600 text-center">Laporan diverifikasi oleh komunitas lokal.</p>
             </div>
-            <div className="bg-gray-100 p-5 rounded-2xl flex-1 border border-gray-200">
+            <div className="flex flex-col bg-gray-100 p-5 rounded-2xl flex-1 border border-gray-200 items-center justify-center">
               <Map className="text-green-700 mb-3" size={24} />
               <h3 className="font-bold text-gray-900 mb-1">Real-time</h3>
-              <p className="text-sm text-gray-600">Peta bahaya yang diperbarui setiap saat.</p>
+              <p className="text-sm text-gray-600 text-center">Peta bahaya yang diperbarui setiap saat.</p>
             </div>
           </div>
         </div>

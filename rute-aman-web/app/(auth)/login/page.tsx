@@ -49,14 +49,16 @@ export default function LoginPage() {
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         
         {/* Kolom Kiri - Teks & Gambar Placeholder */}
-        <div className="hidden md:block">
-          <h1 className="text-4xl font-bold text-gray-900 leading-tight mb-6">
-            Melindungi Komunitas Bersama Melalui Laporan Keamanan Real-Time.
+        <div className="flex flex-col items-center justify-center">
+          <img 
+            src="/RuteAman.png" 
+            alt="RuteAman Logo" 
+            className="w-100 object-contain items-center justify-center"
+          />
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight text-center pt-3 w-60%">
+            Melindungi Komunitas Bersama Melalui <span className="text-blue-600">Laporan Keamanan Real-Time.</span> 
           </h1>
-          {/* Ganti class bg-slate-800 di bawah ini dengan gambar lu, misal: bg-[url('/images/street.jpg')] */}
-          <div className="w-full h-64 bg-slate-800 rounded-2xl shadow-inner overflow-hidden relative">
-             <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
-          </div>
+            
         </div>
 
         {/* Kolom Kanan - Form Login */}
