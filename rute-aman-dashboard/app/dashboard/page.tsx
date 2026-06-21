@@ -1,8 +1,12 @@
+"use-client";
+
 import DashboardLayout from "@/app/components/layout/dashboardlayout";
 import StatCard from "@/app/components/dashboard/StatCard";
 import CategoryFilter from "@/app/components/dashboard/CategoryFilter";
 import ReportMap from "@/app/components/dashboard/ReportMap";
 import LatestReportSection from "@/app/components/dashboard/LatestReportSection";
+import MapSection from "@/app/components/dashboard/mapsection";
+
 import {
   FileText,
   Clock3,
@@ -52,7 +56,7 @@ export default function DashboardPage() {
           <CategoryFilter />
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-8">
-              <ReportMap />
+              <MapSection />
             </div>
 
             <div className="col-span-4">
