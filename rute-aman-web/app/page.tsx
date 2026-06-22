@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { Settings, User, LogIn, UserPlus } from 'lucide-react'; 
+import FormLaporan from '@/components/FormLaporan';
 
 // Load Map tanpa SSR - Pastiin path-nya mengarah ke file MapComponent di atas
 const MapComponent = dynamic(() => import('@/components/MapComponent'), { 
@@ -136,6 +137,8 @@ export default function Home() {
               </div>
             )}
           </div>
+
+          <FormLaporan/>
 
         </div>
       </main>

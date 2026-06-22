@@ -117,6 +117,32 @@ export default function LaporPage() {
     }
   };
 
+  // --- FUNGSI BARU: Validasi File JPG/PNG dan Max 5MB ---
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    
+    if (!selectedFile) return;
+
+    // 1. Validasi Tipe File (MIME Type)
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (!validTypes.includes(selectedFile.type)) {
+      showNotification('Format file ditolak! Harap unggah gambar berformat JPG atau PNG saja.', 'error');
+      e.target.value = ''; // Reset input
+      return;
+    }
+
+    // 2. Validasi Ukuran Maksimal (5 MB = 5 * 1024 * 1024 bytes)
+    const maxSize = 5 * 1024 * 1024;
+    if (selectedFile.size > maxSize) {
+      showNotification('Ukuran gambar terlalu besar! Maksimal 5MB.', 'error');
+      e.target.value = ''; // Reset input
+      return;
+    }
+
+    // Lolos validasi, simpan ke state
+    setFile(selectedFile);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -134,7 +160,8 @@ export default function LaporPage() {
       let imageUrl = null;
       if (file) {
         const fileExt = file.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
+        // Pakai Date.now() biar nama file selalu unik & menghindari bentrok di storage
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
         const { error: uploadError } = await supabase.storage
           .from('report_images')
           .upload(`public/${fileName}`, file);
@@ -157,7 +184,8 @@ export default function LaporPage() {
         location_name: locationName, 
         full_address: fullAddress,   
         image_url: imageUrl,
-        is_anonymous: isAnon
+        is_anonymous: isAnon,
+        status: 'Dilaporkan' // Sesuaikan dengan constraint DB lu
       });
 
       if (error) throw error;
@@ -219,6 +247,7 @@ export default function LaporPage() {
                 selectedCategory={category}
               />
               <button 
+                type="button" // Biar gak submit form pas ditekan
                 onClick={handleGetCurrentLocation}
                 className="absolute bottom-4 right-4 z-[400] bg-white px-4 py-2 rounded-full text-sm font-medium shadow-md flex items-center gap-2 hover:bg-gray-50 border border-gray-200"
               >
@@ -304,15 +333,15 @@ export default function LaporPage() {
         {/* Unggah Foto */}
         <div className="mb-10">
           <label className="block mb-3 font-semibold text-gray-800">Unggah Foto Bukti (Opsional)</label>
-          <label className="border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 transition rounded-xl p-10 flex flex-col items-center justify-center cursor-pointer">
+          <label className="border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 transition rounded-xl p-10 flex flex-col items-center justify-center cursor-pointer relative">
             <UploadCloud size={40} className="text-blue-500 mb-3" />
             <span className="text-gray-700 font-medium">Klik atau seret foto ke sini</span>
-            <span className="text-gray-400 text-sm mt-1">Maksimal ukuran file: 5MB (JPG, PNG)</span>
+            <span className="text-gray-400 text-sm mt-1">Maksimal ukuran file: 5MB (Hanya JPG/PNG)</span>
             <input 
               type="file" 
-              className="hidden" 
-              accept="image/jpeg, image/png"
-              onChange={(e) => e.target.files && setFile(e.target.files[0])}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+              accept="image/jpeg, image/png, image/jpg"
+              onChange={handleFileChange}
             />
           </label>
           
