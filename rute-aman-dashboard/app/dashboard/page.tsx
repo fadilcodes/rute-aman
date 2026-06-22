@@ -6,8 +6,11 @@ import DashboardLayout from "@/app/components/layout/dashboardlayout";
 import StatCard from "@/app/components/dashboard/StatCard";
 import CategoryFilter from "@/app/components/dashboard/CategoryFilter";
 import LatestReportSection from "@/app/components/dashboard/LatestReportSection";
-import MapSection from "@/app/components/dashboard/mapsection";
-
+import dynamic from "next/dynamic";
+const MapSection = dynamic(
+  () => import("@/app/components/dashboard/mapsection"),
+  { ssr: false }
+);
 
 import {
   FileText,
