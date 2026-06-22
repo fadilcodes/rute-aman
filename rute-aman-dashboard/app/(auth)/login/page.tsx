@@ -68,12 +68,11 @@ export default function AdminLoginPage() {
             <span className="text-slate-500">Pusat Kendali Laporan Keamanan.</span>
           </h2>
           
-          <div className="mt-8 rounded-2xl overflow-hidden shadow-xl border border-slate-200/50">
+          <div className="mt-8 rounded-2xl overflow-hidden border border-slate-200/50">
             {/* Pakai placeholder gambar kayak di screenshot */}
             <img 
-              src="https://images.unsplash.com/photo-1514924013411-cce2d6fea50b?q=80&w=2070&auto=format&fit=crop" 
+              src="RuteAman.png" 
               alt="City Street" 
-              className="w-full h-64 object-cover"
             />
           </div>
         </div>
