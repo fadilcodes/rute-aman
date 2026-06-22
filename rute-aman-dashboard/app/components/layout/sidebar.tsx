@@ -82,7 +82,7 @@ export default function Sidebar() {
             </Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link
               href="#"
               className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#D0E1FB] text-[#434655] font-medium"
@@ -90,7 +90,7 @@ export default function Sidebar() {
               <Settings size={20} />
               Pengaturan
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
 
