@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛡️ RuteAman
 
-## Getting Started
+[![Live Demo](https://img.shields.io/badge/Demo-rute--aman.vercel.app-0070F3?style=for-the-badge&logo=vercel&logoColor=white)](https://rute-aman.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-First, run the development server:
+> **RuteAman** adalah platform pemetaan berbasis web dan komunitas *(crowdsourced)* yang dirancang untuk menandai, memantau, dan memvalidasi titik-titik rawan kriminalitas (seperti begal) serta area jalan yang minim penerangan demi keselamatan perjalanan di malam hari.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 Latar Belakang & Masalah
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Banyak komuter, pekerja shift malam, dan mahasiswa merasa waswas saat harus melintasi rute yang sepi atau belum pernah dilewati. Minimnya penerangan jalan umum serta tingginya potensi tindak kejahatan jalanan menjadi ancaman nyata. 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**RuteAman** hadir sebagai wadah kolaboratif di mana masyarakat dapat saling berbagi informasi kondisi jalanan secara *real-time*, sehingga pengguna lain dapat mengambil keputusan rute yang lebih aman.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Fitur Utama
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Aplikasi Publik (`rute-aman-web`)
+* 🗺️ **Peta Interaktif & Geolocation:** Menampilkan peta berbasis Leaflet dengan penanda (*pin/marker*) kategori bahaya (Rawan Begal, Minim Lampu/Gelap, Jalan Rusak) lengkap dengan fitur *clustering*.
+* 📍 **Pelaporan Titik Rawan:** Pengguna dapat menandai koordinat langsung di peta, melampirkan foto bukti, deskripsi kondisi, dan waktu pantauan.
+* 👥 **Validasi Sosial & Komunitas:** Fitur upvote/like laporan untuk memverifikasi keakuratan informasi serta kolom diskusi/komentar untuk pembaruan status terkini di lapangan.
+* 🤖 **AI-Assisted Processing:** Integrasi Google Generative AI (Gemini API) untuk membantu kategorisasi serta peringatan deskripsi laporan.
+* 📱 **Mobile-First & Responsif:** Antarmuka ringan dan cepat diakses langsung dari peramban ponsel pengendara.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2. Panel Admin & Analitik (`rute-aman-dashboard`)
+* 📊 **Pemantauan Agregat:** Monitoring sebaran titik bahaya secara terpusat untuk keperluan moderasi dan evaluasi data.
+* 🛡️ **Sistem Moderasi Laporan:** Validasi dan penindakan terhadap laporan palsu *(hoax)* atau konten yang melanggar.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🏗️ Struktur Repositori
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proyek ini menggunakan struktur multi-aplikasi (monorepo sederhana):
+
+```text
+rute-aman/
+├── rute-aman-web/          # Aplikasi utama untuk pengguna publik
+│   ├── app/                # Next.js App Router
+│   ├── components/         # Komponen UI & Maps (React-Leaflet)
+│   ├── lib/                # Konfigurasi Supabase client & utilitas
+│   ├── public/             # Aset statis
+│   ├── package.json
+│   └── next.config.ts
+├── rute-aman-dashboard/    # Dashboard pemantauan dan administrasi
+│   ├── app/                # Next.js App Router
+│   ├── components/         # Komponen dashboard & visualisasi data
+│   ├── lib/                # Supabase client & TanStack Query
+│   ├── package.json
+│   └── next.config.ts
+├── RuteAman.png            # Banner / logo proyek
+└── package-lock.json
