@@ -10,4 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Main Page
-        run: curl -sSf "https://ruteaman.fadilweb.my.id/"
+        run: curl -sSf "https://ruteaman.fadilweb.my.id/" && curl -sSf "https://dashboard-ruteaman.fadilweb.my.id/"
+        
