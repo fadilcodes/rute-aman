@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { createClient } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Eye, EyeOff, ShieldCheck, Map } from 'lucide-react';
+import { Eye, EyeOff, ShieldCheck, Map, AlertTriangle, CheckCircle } from 'lucide-react';
 
 export default function RegisterPage() {
   const [fullName, setFullName] = useState('');
@@ -13,15 +13,25 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+  // State khusus untuk Custom Notification
+  const [notif, setNotif] = useState<{ type: 'error' | 'success'; message: string } | null>(null);
 
   const supabase = createClient();
   const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!agreed) return alert('Lu harus setuju sama Syarat & Ketentuan dulu, Dil!');
+    
+    // Validasi Syarat & Ketentuan pakai Notif Custom
+    if (!agreed) {
+      setNotif({ type: 'error', message: 'Silakan centang Syarat & Ketentuan untuk dapat lanjut!' });
+      return;
+    }
     
     setIsLoading(true);
+    setNotif(null); // Bersihin notif sebelumnya kalau ada
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -35,11 +45,21 @@ export default function RegisterPage() {
     setIsLoading(false);
 
     if (error) {
-      alert(error.message);
+      setNotif({ type: 'error', message: error.message });
     } else {
-      alert('Registrasi berhasil! Cek email buat verifikasi ya.');
+      setNotif({ 
+        type: 'success', 
+        message: 'Registrasi berhasil! Cek kotak masuk email untuk verifikasi.' 
+      });
+    }
+  };
+
+  // Fungsi buat nutup notifikasi (dan redirect kalau sukses)
+  const closeNotif = () => {
+    if (notif?.type === 'success') {
       router.push('/login');
     }
+    setNotif(null);
   };
 
   const handleGoogleLogin = async () => {
@@ -50,7 +70,42 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-gray-50 flex items-center justify-center p-6">
+    <div className="relative min-h-[calc(100vh-64px)] bg-gray-50 flex items-center justify-center p-6">
+      
+      {/* --- CUSTOM NOTIFICATION MODAL (Center Focus) --- */}
+      {notif && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center transform scale-100 transition-all border border-gray-100">
+            
+            {/* Ikon Notif */}
+            <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5 ${notif.type === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+              {notif.type === 'success' ? <CheckCircle size={32} /> : <AlertTriangle size={32} />}
+            </div>
+            
+            {/* Judul & Pesan */}
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              {notif.type === 'success' ? 'Mantap!' : 'Oops, Ada Kendala!'}
+            </h3>
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              {notif.message}
+            </p>
+            
+            {/* Tombol Aksi */}
+            <button 
+              onClick={closeNotif}
+              className={`w-full py-3.5 rounded-xl font-bold text-white transition-all shadow-sm ${
+                notif.type === 'success' 
+                  ? 'bg-green-600 hover:bg-green-700 shadow-green-600/20' 
+                  : 'bg-red-600 hover:bg-red-700 shadow-red-600/20'
+              }`}
+            >
+              {notif.type === 'success' ? 'Lanjut ke Login' : 'Mengerti'}
+            </button>
+          </div>
+        </div>
+      )}
+      {/* ----------------------------------------------- */}
+
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
         {/* Kolom Kiri - Copywriting & Features */}
@@ -92,7 +147,7 @@ export default function RegisterPage() {
               <input 
                 type="text" 
                 required
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none transition-all"
                 placeholder="Budi Santoso"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -103,7 +158,7 @@ export default function RegisterPage() {
               <input 
                 type="email" 
                 required
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none transition-all"
                 placeholder="contoh@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -115,14 +170,14 @@ export default function RegisterPage() {
                 <input 
                   type={showPassword ? "text" : "password"} 
                   required
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full border border-gray-300 rounded-lg p-3 pr-12 focus:ring-2 focus:ring-blue-600 focus:outline-none transition-all"
                   placeholder="Min. 8 karakter"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button 
                   type="button" 
-                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -130,14 +185,14 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            <div className="flex items-start gap-2">
+            <div className="flex items-start gap-3 mt-4">
               <input 
                 type="checkbox" 
-                className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                 checked={agreed}
                 onChange={(e) => setAgreed(e.target.checked)}
               />
-              <label className="text-sm text-gray-600">
+              <label className="text-sm text-gray-600 leading-relaxed cursor-pointer" onClick={() => setAgreed(!agreed)}>
                 Saya setuju dengan <Link href="/privasi" className="text-blue-600 hover:underline">Kebijakan Privasi</Link> dan <Link href="/syarat" className="text-blue-600 hover:underline">Syarat & Ketentuan</Link>.
               </label>
             </div>
@@ -145,33 +200,14 @@ export default function RegisterPage() {
             <button 
               type="submit" 
               disabled={isLoading}
-              className="w-full bg-blue-700 text-white font-semibold py-3 rounded-lg hover:bg-blue-800 transition disabled:opacity-70"
+              className="w-full bg-blue-700 text-white font-semibold py-3.5 rounded-xl hover:bg-blue-800 transition-all shadow-sm shadow-blue-700/20 disabled:opacity-70 disabled:cursor-not-allowed mt-4"
             >
               {isLoading ? 'Mendaftarkan...' : 'Daftar Sekarang'}
             </button>
           </form>
 
-          {/* <div className="flex items-center my-6">
-            <div className="flex-1 border-t border-gray-200"></div>
-            <span className="px-3 text-sm text-gray-400">ATAU</span>
-            <div className="flex-1 border-t border-gray-200"></div>
-          </div>
-
-          <button 
-            onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-50 transition"
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24">
-              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
-            Daftar dengan Google
-          </button> */}
-
           <p className="text-center text-sm text-gray-600 mt-8">
-            Sudah punya akun? <Link href="/login" className="text-blue-600 font-medium hover:underline">Masuk di sini</Link>
+            Sudah punya akun? <Link href="/login" className="text-blue-600 font-bold hover:underline">Masuk di sini</Link>
           </p>
         </div>
       </div>
