@@ -1,0 +1,13 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Jalan tiap jam 00:00 UTC setiap hari
+  workflow_dispatch: # Biar lu bisa ngetes script ini secara manual
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Main Page
+        run: curl -sSf "https://ruteaman.fadilweb.my.id/"
